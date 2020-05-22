@@ -67,7 +67,7 @@ class _Contract_listState extends State<Contract_list> {
       padding: const EdgeInsets.only(top:8.0,bottom: 15),
       child: Container(
         width: double.infinity,
-        height:540,
+        height:670,
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -129,11 +129,21 @@ class _Contract_listState extends State<Contract_list> {
               Container(width: 200,height: 100,
               child: Row(
                 children: <Widget>[
-                  Text('Detail:',style: TextStyle(fontWeight: FontWeight.bold),), SizedBox(width: 15,),
+                  Text('Information:',style: TextStyle(fontWeight: FontWeight.bold),), SizedBox(width: 15,),
                   Flexible(child: Text( ContractList[index]['contract_information'])),
                 ],
               ),
+
               ),
+                Container(width: 200,height: 100,
+                  child: Row(
+                    children: <Widget>[
+                      Text('Description:',style: TextStyle(fontWeight: FontWeight.bold),), SizedBox(width: 15,),
+                      Flexible(child: Text( ContractList[index]['contract_description'])),
+                    ],
+                  ),
+
+                ),
             ],),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
