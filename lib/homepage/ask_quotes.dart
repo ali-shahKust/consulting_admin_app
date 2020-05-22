@@ -1,15 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:consultingadminapp/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../client_chat_page.dart';
+import '../constants.dart';
 import '../full_screen_image.dart';
 
-class Contract_list extends StatefulWidget {
+class Ask_quotes extends StatefulWidget {
   @override
-  _Contract_listState createState() => _Contract_listState();
+  _Ask_quotesState createState() => _Ask_quotesState();
 }
 final List<DocumentSnapshot> ContractList = [];
 final databaseReference = Firestore.instance;
@@ -20,8 +19,7 @@ final Color divider = Colors.white;
 String myName = '';
 String abtMe = '';
 String myDp = '';
-
-class _Contract_listState extends State<Contract_list> {
+class _Ask_quotesState extends State<Ask_quotes> {
   @override
   void initState() {
     // TODO: implement initState
@@ -34,7 +32,7 @@ class _Contract_listState extends State<Contract_list> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: appColor,
-        title: Center(child: Text('Contract List', style: TextStyle(color: Colors.white),),),
+        title: Center(child: Text('Quotes', style: TextStyle(color: Colors.white),),),
       ),
       body: ListView(
         children: <Widget>[
@@ -47,14 +45,11 @@ class _Contract_listState extends State<Contract_list> {
                   .height,
               width: double.infinity,
               color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.only(bottom:18.0),
-                child: ListView.builder(
-                    itemCount: ContractList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return buildList(context, index);
-                    }),
-              ),
+              child: ListView.builder(
+                  itemCount: ContractList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return buildList(context, index);
+                  }),
             ),
           )
         ],
@@ -64,7 +59,7 @@ class _Contract_listState extends State<Contract_list> {
 
   Widget buildList(BuildContext context, int index) {
     return Padding(
-      padding: const EdgeInsets.only(top:8.0,bottom: 15),
+      padding: const EdgeInsets.all(8.0),
       child: Container(
         width: double.infinity,
         height:540,
@@ -107,34 +102,34 @@ class _Contract_listState extends State<Contract_list> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
 
-              ClipRRect(
-                borderRadius: BorderRadius.circular(16.0),
-                child: ContractList[index]['contract_document']!=null?GestureDetector(
-                  onTap: (){
-                    Navigator.push(
-                        context,
-                        new MaterialPageRoute(
-                            builder: (context) => FullScreenImage(
-                              photoUrl:  ContractList[index]['contract_document']
-                            )));
-                  },
-                  child: Image.network(
-                    ContractList[index]['contract_document'],
-                    height: 250.0,
-                    width: 300.0,
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(16.0),
+                  child: ContractList[index]['quotes_document']!=null?GestureDetector(
+                    onTap: (){
+                      Navigator.push(
+                          context,
+                          new MaterialPageRoute(
+                              builder: (context) => FullScreenImage(
+                                  photoUrl:  ContractList[index]['quotes_document']
+                              )));
+                    },
+                    child:ContractList[index]['quotes_document']!=null? Image.network(
+                      ContractList[index]['quotes_document'],
+                      height: 250.0,
+                      width: 300.0,
+                    ):Image.asset('images/file.png'),
+                  ):Image.asset('images/file.png'),
+                ),
+                SizedBox(height: 25,),
+                Container(width: 200,height: 100,
+                  child: Row(
+                    children: <Widget>[
+                      Text('Detail:',style: TextStyle(fontWeight: FontWeight.bold),), SizedBox(width: 15,),
+                      Flexible(child: Text( ContractList[index]['ask_quottation'])),
+                    ],
                   ),
-                ):Image.asset('images/file.png'),
-              ),
-              SizedBox(height: 25,),
-              Container(width: 200,height: 100,
-              child: Row(
-                children: <Widget>[
-                  Text('Detail:',style: TextStyle(fontWeight: FontWeight.bold),), SizedBox(width: 15,),
-                  Flexible(child: Text( ContractList[index]['contract_information'])),
-                ],
-              ),
-              ),
-            ],),
+                ),
+              ],),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -148,11 +143,11 @@ class _Contract_listState extends State<Contract_list> {
                           color: appColor),
                       child: FlatButton(
                         child: Text(
-                          "Delete",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 14)
+                            "Delete",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 14)
                         ),
                         onPressed: () {
                           deleteData(ContractList[index].documentID, index);                      },
@@ -196,7 +191,7 @@ class _Contract_listState extends State<Contract_list> {
   void deleteData(String documentId, int index) {
     try {
       databaseReference
-          .collection('contract')
+          .collection('ask quotes')
           .document(documentId)
           .delete().then(
               (val) {
@@ -218,7 +213,7 @@ class _Contract_listState extends State<Contract_list> {
     ContractList.clear();
     String uId = (await FirebaseAuth.instance.currentUser()).uid;
     databaseReference
-        .collection("contract").where('lawyer_uid', isEqualTo: uId)
+        .collection("ask quotes").where('lawyer_uid', isEqualTo: uId)
         .getDocuments()
         .then((QuerySnapshot snapshot) {
       snapshot.documents.forEach((f) => ContractList.add(f));
@@ -229,3 +224,4 @@ class _Contract_listState extends State<Contract_list> {
   }
 
 }
+

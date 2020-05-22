@@ -1,4 +1,6 @@
 import 'package:consultingadminapp/homepage/Contract_list.dart';
+import 'package:consultingadminapp/homepage/ask_quotes.dart';
+import 'package:consultingadminapp/homepage/opinion_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_container/responsive_container.dart';
@@ -36,7 +38,7 @@ class _HomePageState extends State<HomePage> {
               iconButton: IconButton(
                   icon: Icon(CupertinoIcons.forward),
                   onPressed: (){
-//                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=> LegalOpinion()));
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Opinion_List()));
                   }),
             ),
             homePageContainer(
@@ -66,35 +68,11 @@ class _HomePageState extends State<HomePage> {
               iconButton: IconButton(
                   icon: Icon(CupertinoIcons.forward),
                   onPressed: (){
-                  //  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Lawsuit()));
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Ask_quotes()));
                   }),
             ),
             sizedBoxHeight,
             sizedBoxHeight,
-            sizedBoxHeight,
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: ResponsiveContainer(
-                widthPercent: 100.0,
-                heightPercent: 8.0,
-                child: MaterialButton(
-                  color:Color(0xFF001E36),
-                  child: Padding(
-                    padding: const EdgeInsets.only(top:20.0,bottom: 20.0),
-                    child: Text('PREMIUM PROFILE',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),),
-                  ),
-                  shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(30.0),
-                  ),
-                  onPressed: (){
-
-                  },
-                ),
-              ),
-            ),
           ],
         ),
       ),
