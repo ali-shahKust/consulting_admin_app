@@ -57,7 +57,7 @@ class _Profile_SettingState extends State<Profile_Setting> {
   Widget build(BuildContext context) {
     if(mRef != null){
       _namecontroller.text = mRef['username'];
-      _phonecontroller.text = mRef['phonenumber'];
+      _phonecontroller.text = mRef['phone_number'];
       _majorcontroller.text = mRef['type'];
       _xpcontroller.text = mRef['year_experience'];
       _feescontroller.text = mRef['fees'];

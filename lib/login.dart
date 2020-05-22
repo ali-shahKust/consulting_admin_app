@@ -284,7 +284,7 @@ class _LoginState extends State<Login> {
       pr.hide().then((isHidden) {
         print(isHidden);
       });
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Profile_Setting()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
     }catch(e){
       pr.hide().then((isHidden) {
         print(isHidden);
